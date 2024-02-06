@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   calculateWithGetComponent: 0
   calculateWithForLoop: 0
-  calculateWithFindObject: 0
+  calculateWithFindAnyObject: 0
+  calculateWithFindFirstObject: 0
   calculateWithNullCheck: 0
   numberOfGetComponents: 100
   numberOfForLoops: 100
-  numberOfFindObject: 100
+  numberOfFindAnyObject: 100
+  numberOfFindFirstObject: 100
   numberOfUpdates: 1000
   numberOfNullChecks: 100

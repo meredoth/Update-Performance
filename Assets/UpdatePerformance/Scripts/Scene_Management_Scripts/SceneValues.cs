@@ -7,11 +7,13 @@ public class SceneValues : ScriptableObject
 {
    public bool calculateWithGetComponent;
    public bool calculateWithForLoop;
-   public bool calculateWithFindObject;
+   public bool calculateWithFindAnyObject;
+   public bool calculateWithFindFirstObject;
    public bool calculateWithNullCheck;
    public float numberOfGetComponents;
    public float numberOfForLoops;
-   public float numberOfFindObject;
+   public float numberOfFindAnyObject;
+   public float numberOfFindFirstObject;
    public float numberOfUpdates;
    public float numberOfNullChecks;
 }

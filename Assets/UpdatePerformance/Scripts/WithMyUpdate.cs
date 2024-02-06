@@ -8,15 +8,23 @@ public class WithMyUpdate : MonoBehaviour, IMyUpdate
     
     private bool _calculateWithGetComponent;
     private bool _calculateWithForLoop;
-    private bool _calculateWithFindObject;
+    private bool _calculateWithFindAnyObject;
+    private bool _calculateWithFindFirstObject;
     private bool _calculateWithNullCheck;
     private int _noOfGetComponent;
     private int _noOfForLoops;
-    private int _noOfFindObjects;
+    private int _noOfFindAnyObjects;
+    private int _noOfFindFirstObjects;
     private int _noOfNullChecks;
 
-    private void OnEnable() => updateManager.AddUpdatable(this);
-
+    private void OnEnable()
+    {
+        if (updateManager == null)
+            updateManager = FindAnyObjectByType<UpdateManager>();
+        
+        updateManager.AddUpdatable(this);
+    }
+    
     void IMyUpdate.MyUpdate()
     {
         if (_calculateWithNullCheck)
@@ -24,10 +32,15 @@ public class WithMyUpdate : MonoBehaviour, IMyUpdate
             for (var j = 0; j < _noOfNullChecks; j++)
                 if (gameObject != null) ;
         }
-        if (_calculateWithFindObject)
+        if (_calculateWithFindAnyObject)
         {
-            for (var j = 0; j < _noOfFindObjects; j++)
-                FindObjectOfType<WithMyUpdate>();
+            for (var j = 0; j < _noOfFindAnyObjects; j++)
+                FindAnyObjectByType<WithMyUpdate>();
+        }
+        if (_calculateWithFindFirstObject)
+        {
+            for (var j = 0; j < _noOfFindFirstObjects; j++)
+                FindFirstObjectByType<WithUpdate>();
         }
         if (_calculateWithGetComponent)
         {
@@ -42,11 +55,13 @@ public class WithMyUpdate : MonoBehaviour, IMyUpdate
 
     public void ToggleGetComponent() => _calculateWithGetComponent = !_calculateWithGetComponent;
     public void ToggleForLoop() => _calculateWithForLoop = !_calculateWithForLoop;
-    public void ToggleFindObject() => _calculateWithFindObject = !_calculateWithFindObject;
+    public void ToggleFindAnyObject() => _calculateWithFindAnyObject = !_calculateWithFindAnyObject;
+    public void ToggleFindFirstObject() => _calculateWithFindFirstObject = !_calculateWithFindFirstObject;
     public void ToggleNullCheck() => _calculateWithNullCheck = !_calculateWithNullCheck;
     public void SetGetComponentLoops(float amount) => _noOfGetComponent = (int)amount;
     public void SetForLoops(float amount) => _noOfForLoops = (int)amount;
-    public void SetFindObjectLoops(float amount) => _noOfFindObjects = (int)amount;
+    public void SetFindFirstObjectLoops(float amount) => _noOfFindFirstObjects = (int)amount;
+    public void SetFindAnyObjectLoops(float amount) => _noOfFindAnyObjects = (int)amount;
     public void SetNullCheckLoops(float amount) => _noOfNullChecks = (int)amount;
     private void OnDisable() => updateManager.RemoveUpdatable(this);
 }
